@@ -3,7 +3,15 @@ package com.angel.queen.dao.mapper;
 import com.angel.queen.dao.SqlMapper;
 import com.angel.queen.model.ConUsers;
 
-public interface ConUsersMapper extends SqlMapper{
+/**
+ * 类名称：
+ * 类描述：
+ * @author JBH
+ * @version 2015-01-26
+ * @since JDK1.6
+ */
+public interface ConUsersMapper 
+					extends SqlMapper{
     int deleteByPrimaryKey(Long userId);
 
     int insert(ConUsers record);
@@ -15,4 +23,6 @@ public interface ConUsersMapper extends SqlMapper{
     int updateByPrimaryKeySelective(ConUsers record);
 
     int updateByPrimaryKey(ConUsers record);
+    
+    ConUsers userLogin(ConUsers user);
 }
