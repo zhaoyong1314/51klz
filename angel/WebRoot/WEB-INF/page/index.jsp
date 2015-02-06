@@ -18,6 +18,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 	<link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/common/share.css"/>
 	<link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/index.css"/>
+	<script type="text/javascript" src="<%=path %>/resources/js/common/mf.jquery.js"></script>
+	<script type="text/javascript" src="<%=path %>/resources/js/login.js"></script>
+	<script type="text/javascript">
+		jQuery(function(){
+			var loginUser = "${loginUser.userName }";
+			if(loginUser !== null && loginUser !== ''){
+				jQuery(".LoginBox").hide();
+			}
+		});
+	</script>
   </head>
   
  <body>
@@ -29,6 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="top-step">
             <img src="http://img.lezhuan1.com/images/index/step.gif">
         </div>
+        <input id="path" type="hidden" value="<%=path%>"/>
         <div class="slide">
                 <ul class="PptImg" style="left: -2970px; width: 5000px;">
                     <li><a target="_blank" title="冬季活动" href="http://www.lezhuan.com/activities/winter/" onclick="hitsJump('area',102)"><img src="http://img.lezhuan1.com/attach/area/102.jpg?1419997701" border="0"></a></li>
@@ -45,12 +56,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="LoginBox" style="padding-top:10px; height:246px; top:16px;">
                 <div class="LoginIpt" style="height:auto; background:url(http://img.lezhuan1.com/images/index/yz_bg.png);">
                     <input id="token" type="hidden" name="token" value="f178a74159c735ccac7e561659c3cc54">
-                    <p>用户名：&nbsp;<input id="tbUserAccount" type="text" name="tbUserAccount" onkeyup="this.value=this.value.replace(/[\W]/g,'')"></p>
-                    <p>密<span class="a1"></span>码：&nbsp;<input id="tbUserPwd" type="password" name="tbUserPwd" value=""></p>
+                    <p>用户名：&nbsp;<input id="username" type="text" name="userName" onkeyup="this.value=this.value.replace(/[\W]/g,'')"></p>
+                    <p>密<span class="a1"></span>码：&nbsp;<input id="password" type="password" name="password" value=""></p>
                     <p id="tbLoginCode" style="display:none">验证码：&nbsp;<input id="tbCode" type="text" name="tbCode" value="" style="width:100px;"><img id="tbLoginImg" style="position:relative; top:5px;cursor:pointer;" title="点击更换图片" onclick="this.src='http://www.lezhuan.com/code.num.img.login.php?'+Math.random()" src="" height="20"></p>
                 </div>
-                <div class="LoginBtn"><a href="javascript:void(0);" onclick="chkLogin()"></a></div>
-                <div class="LoginTxt"><span><a href="/reg.html" class="LRegLink">免费注册</a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><a href="/forget.html" class="w12l">忘记密码</a></span></div>
+                <div class="LoginBtn"><a href="javascript:void(0);" id="login"></a></div>
+                <div class="LoginTxt"><span><a href="<%=path %>/index/register" class="LRegLink">免费注册</a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><a href="/forget.html" class="w12l">忘记密码</a></span></div>
                 <div class="LoginTips">
                     <p><a href="/question/8/54" class="w12l" target="_blank">在快乐赚可以做什么？</a></p>
                     <p><a href="/question/8/55" class="w12l" target="_blank">乐币是什么？</a></p>

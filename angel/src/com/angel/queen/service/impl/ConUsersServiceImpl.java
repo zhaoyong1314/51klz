@@ -3,6 +3,7 @@ package com.angel.queen.service.impl;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.angel.queen.dao.mapper.ConUsersMapper;
 import com.angel.queen.model.ConUsers;
@@ -29,6 +30,16 @@ public class ConUsersServiceImpl  implements IConUsersService{
 		
 		logger.info("------------------user login service-------------");
 		return this.conUsersMapper.userLogin(user);
+	}
+
+	@Override
+	public ConUsers findUserByUserName(String userName) {
+		return this.conUsersMapper.selectUserByUserName(userName);
+	}
+
+	@Transactional
+	public int createUser(ConUsers user) {
+		return this.conUsersMapper.insert(user);
 	}
 
 }

@@ -9,7 +9,7 @@
 <context-param>
     <param-name>contextConfigLocation</param-name>
     <!-- 应用上下文配置文件 -->
-  	<param-value>classpath:applicationContext.xml</param-value>
+  	<param-value>classpath:spring-common.xml</param-value>
 </context-param>
   <!-- ContextLoaderListener初始化的上下文加载的Bean是对于整个应用程序共享的，不管是使用什么表现层技术，一般如DAO层、Service层Bean -->  
   <listener>
@@ -44,7 +44,7 @@
     <!-- 可以自定义servlet.xml配置文件的位置和名称，默认为WEB-INF目录下，名称为[<servlet-name>]-servlet.xml -->
     <init-param>
     	<param-name>contextConfigLocation</param-name>
-    	<param-value>classpath:springmvc.xml</param-value>
+    	<param-value>classpath:spring-mvc.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
@@ -61,4 +61,22 @@
         <param-name>log4jConfigLocation</param-name>  
         <param-value>classpath:log4j.properties</param-value>  
   	</context-param> 
+  	
+  <!-- session超时定义,单位为分钟 -->  
+   <session-config>
+  		<session-timeout>20</session-timeout>
+   </session-config>
+  <!-- 请求失败页面 -->
+   <error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/WEB-INF/page/error.jsp</location>
+   </error-page>
+   <error-page>
+  		<error-code>404</error-code>
+  		<location>/WEB-INF/page/error.jsp</location>
+   </error-page>
+   <error-page>
+  		<error-code>500</error-code>
+  		<location>/WEB-INF/page/error.jsp</location>
+   </error-page>
 </web-app>

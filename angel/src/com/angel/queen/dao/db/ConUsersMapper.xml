@@ -19,6 +19,17 @@
     from con_users
     where user_id = #{userId,jdbcType=BIGINT}
   </select>
+  
+  <!-- 根据用户名查找用户记录 -->
+  <select id="selectUserByUserName" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	SELECT
+  	<include refid="Base_Column_List"/>
+  	FROM
+  	con_users u
+  	WHERE
+  	u.user_name = #{userName,jdbcType=VARCHAR}
+  </select>
+  
   <!-- 简单用户登录 -->
   <select id="userLogin" resultMap="BaseResultMap" parameterType="com.angel.queen.model.ConUsers">
   	SELECT
@@ -26,9 +37,9 @@
   	FROM
   	con_users u
   	WHERE
-  	u.user_name = #{userName,jdbcType=VARCHAR}
+  		u.user_name = #{userName,jdbcType=VARCHAR}
   	AND
-  	u.password = #{password,jdbcType=VARCHAR}
+  		u.password = #{password,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from con_users

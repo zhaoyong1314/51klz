@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <a href="/question.php"><img src="http://img.lezhuan1.com/images/top_tb.png">帮助中心</a>|<a href="javascript:void(0)" onclick="javascript:AddFavorite('http://www.lezhuan.com','快乐赚-网赚网_打码赚钱_游戏赚钱_网络兼职平台');"><img src="http://img.lezhuan1.com/images/top_tb2.png">收藏本站</a>
             </div>
             <div class="right">
-                您好，欢迎来到快乐赚！<a href="/login.html">登录</a>|<a href="/reg.html">免费注册</a>
+                您好${loginUser.userName }，欢迎来到快乐赚！<a href="<%=path %>/index/login">登录</a>|<a href="<%=path %>/index/register">免费注册</a>|<a href="<%=path %>/index/logout">退出</a>
             </div>
         </div>
         <div class="header-box">

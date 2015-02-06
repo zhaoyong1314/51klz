@@ -25,4 +25,6 @@ public interface ConUsersMapper
     int updateByPrimaryKey(ConUsers record);
     
     ConUsers userLogin(ConUsers user);
+    
+    ConUsers selectUserByUserName(String userName);
 }

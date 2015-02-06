@@ -11,24 +11,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>登录</title>
 <link href="<%=path%>/resources/css/login.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%=path %>/resources/js/common/mf.jquery.js"></script>
-<script type="text/javascript">
-	jQuery(function(){
-		jQuery("#login").on("click", function(){
-			if(!jQuery("#username").val()){
-				alert("用户名不能为空");
-				return false;
-			}else if(!jQuery("#password").val()){
-				alert("密码不能为空");
-				return false;
-			}else{
-				//ajax
-			}
-		});
-	});
-</script>
+<script type="text/javascript" src="<%=path %>/resources/js/login.js"></script>
 </head>
   
 <body>
+<input id="path" type="hidden" value="<%=path%>"/>
 <div class="mainBox">
   <div class="regBox">
       <p class="title">登录</p>

@@ -3,9 +3,9 @@ package com.angel.queen.controller;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.angel.queen.common.BaseController;
 import com.angel.queen.model.ConUsers;
@@ -38,27 +38,86 @@ public class ConUsersController
 	
 	/**
 	 * 用户登录
+	 * @param username
+	 * @param password
 	 * @return
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(Model model, ConUsers loginUser){
+	public @ResponseBody String login(String username, String password){
 		
-		logger.info("-----------------用户登录方法---------------");
+		logger.info("-------------login username--------" + username);
+		logger.info("-------------login password--------" + password);
 		
-		ConUsers user = this.conUsersServiceImpl.login(loginUser);
-		if(user != null){
+		ConUsers exist = this.conUsersServiceImpl.findUserByUserName(username);
+		if(exist != null){//用户名不存在
 			
-			//如果需要重定向，让浏览器显示的URL地址栏发生改变，那么，这一步取消
-			//参数赋值以及传递
-			//model.addAttribute("msg", "login success");
-			logger.info("-------------登录成功-----------");
-			super.session.setAttribute("loginUser", user);
-			return "redirect:/index";
+			ConUsers loginUser = new ConUsers();
+			loginUser.setUserName(username);
+			loginUser.setPassword(password);
+			
+			ConUsers user = this.conUsersServiceImpl.login(loginUser);
+			if(user != null){//用户登录成功
+				
+				super.session.setAttribute("loginUser", user);
+				return "0";
+			}else{
+				logger.info("----------------密码验证错误----------------");
+				return "2";
+			}
 		}else{
-			model.addAttribute("msg", "login failure");
-			logger.info("-------------登录失败-----------");
-			return "login";
+			logger.info("---------------用户名不存在---------------------");
+			return "1";
 		}
 	}
 	
+	/**
+	 * 注册
+	 * @return
+	 */
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String register(){
+		
+		return "register";
+	}
+	
+	/**
+	 * 注销
+	 * @return
+	 */
+	@RequestMapping("/logout")
+	public String logout(){
+		
+		super.session.invalidate();//注销
+		return "redirect:/index/login";
+	}
+	
+	@RequestMapping("/valid")
+	public @ResponseBody String validUsername(String username){
+		
+		logger.info("-----------valid username----------" + username);
+		
+		ConUsers exist = this.conUsersServiceImpl.findUserByUserName(username);
+		if(exist != null){
+			
+			return "true";
+		}else{
+			return "false";
+		}
+	}
+	
+	/**
+	 * 注册
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public @ResponseBody String addUser(ConUsers user){
+		
+		int result =  this.conUsersServiceImpl.createUser(user);
+		if(result == 1){
+			return "true";
+		}else{
+			return "false";
+		}
+	}
 }
