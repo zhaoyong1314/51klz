@@ -64,7 +64,7 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/org.springframework.jdbc-3.1.1.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/org.springframework.orm-3.1.1.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/org.springframework.oxm-3.1.1.RELEASE.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/org.springframework.test-3.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/org.springframework.test-3.0.5.RELEASE.jar" sourcepath="D:/Maven/Repositories/org/springframework/spring-test/3.0.5.RELEASE/spring-test-3.0.5.RELEASE-sources.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/org.springframework.transaction-3.1.1.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/org.springframework.web-3.1.1.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/org.springframework.web.servlet-3.1.1.RELEASE.jar"/>

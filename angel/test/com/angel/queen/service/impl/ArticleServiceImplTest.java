@@ -1,46 +1,23 @@
-package com.angel.queen.controller;
+package com.angel.queen.service.impl;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.angel.queen.base.BaseDAOTestCaseJunit4;
 import com.angel.queen.common.ArticleLevelEnum;
 import com.angel.queen.dao.mapper.ArticleModelMapper;
 import com.angel.queen.model.ArticleModel;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
-
-/**
- * 类名称：
- * 类描述：
- * @author JBH
- * @version 2015-01-26
- * @since JDK1.6
- */
-@Controller
-@RequestMapping("/mytest")
-public class IndexController {
-
+public class ArticleServiceImplTest extends  BaseDAOTestCaseJunit4{
+	private static Logger logger = Logger.getLogger(ConUsersServiceImplTest.class);
+	
 	@Autowired
 	private ArticleModelMapper articleModelMapper;
- 	
-	/** 日志记录 */
-	private final Logger logger = Logger.getLogger(IndexController.class);
-
-	@RequestMapping(value = {"/index", "/"})
-	public String index(){
-		
-		//插入文章
-//		insertArticles();
-		logger.info("-----------------首页--------------");
-		return "index";
-	}
 	
+	@Test
 	public void insertArticles(){
 		for (int i = 0; i < 6; i++) {
 			ArticleModel articleModel = new ArticleModel();
@@ -60,11 +37,10 @@ public class IndexController {
 			articleModel.setAuthor("zy");
 			articleModel.setArticletype(1);
 			articleModel.setLevel(ArticleLevelEnum.ARTICLE_LEVEL_HOT.getKey());
-	   	 	SimpleDateFormat dfs = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			articleModel.setPublishtime(dfs.format(new Date()));
+			articleModel.setPublishtime(new Date());
 			articleModel.setRemark("这是一个测试");
 			articleModelMapper.insert(articleModel);
 		}
 	}
-
+	
 }

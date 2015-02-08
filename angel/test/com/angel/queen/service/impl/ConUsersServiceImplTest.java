@@ -10,9 +10,8 @@ import com.angel.queen.base.BaseDAOTestCaseJunit4;
 import com.angel.queen.model.ConUsers;
 import com.angel.queen.service.IConUsersService;
 
-public class ConUsersServiceImplTest 
-				extends BaseDAOTestCaseJunit4{
-
+public class ConUsersServiceImplTest extends BaseDAOTestCaseJunit4{
+				
 	private static Logger logger = Logger.getLogger(ConUsersServiceImplTest.class);
 	
 	@Autowired
