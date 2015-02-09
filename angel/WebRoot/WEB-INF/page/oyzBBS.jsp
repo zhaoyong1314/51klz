@@ -66,10 +66,10 @@
                             <cite class="thread-author">
                                 <a href="home.php?mod=space&amp;uid=17639332">${article.author}</a>
                             </cite>
-                            <em>于 <span><span title="2015-2-6">昨天&nbsp;10:40</span></span> 发表</em><span class="pipe">|</span>
+                            <em>于 <span><span title="2015-2-6">${article.publishDateDescribe}</span></span> 发表</em><span class="pipe">|</span>
                             <cite class="thread-author">
                                 <a href="home.php?mod=space&amp;username=" c="1">${article.lastReplyer}</a></cite>
-                            <em>&nbsp;于&nbsp;<a href="forum.php?mod=redirect&amp;tid=5375863&amp;goto=lastpost#lastpost" class="lastpost-time"><span title="2015-2-7 18:14">27&nbsp;分钟前</span></a>&nbsp;最后回复</em>
+                            <em>&nbsp;于&nbsp;<a href="forum.php?mod=redirect&amp;tid=5375863&amp;goto=lastpost#lastpost" class="lastpost-time"><span title="2015-2-7 18:14">${article.lastReplyDateDesribe }</span></a>&nbsp;最后回复</em>
                             <a href="thread-5375863-1-1.html" class="reply-num">161</a>
                         </div>
                     </div>
