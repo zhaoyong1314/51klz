@@ -37,7 +37,7 @@ public class ArticleServiceImplTest extends  BaseDAOTestCaseJunit4{
 			articleModel.setAuthor("zy");
 			articleModel.setArticletype(1);
 			articleModel.setLevel(ArticleLevelEnum.ARTICLE_LEVEL_HOT.getKey());
-			articleModel.setPublishtime(new Date());
+			articleModel.setPublishtime((new Date()).toString());
 			articleModel.setRemark("这是一个测试");
 			articleModelMapper.insert(articleModel);
 		}
