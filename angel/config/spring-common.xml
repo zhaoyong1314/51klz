@@ -6,6 +6,7 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 	http://www.springframework.org/schema/aop 
@@ -15,7 +16,9 @@
 	http://www.springframework.org/schema/tx 
 	http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
 	http://www.springframework.org/schema/context 
-	http://www.springframework.org/schema/context/spring-context-3.1.xsd"
+	http://www.springframework.org/schema/context/spring-context-3.1.xsd
+	http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring  
+ 	http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.1.xsd"
 	default-autowire="byName">
 
 	<!-- 开启注解配置 -->
@@ -75,7 +78,7 @@
 	</bean>
 
 	
-	<!-- 注解开启事务 wangzy 2014-9-23-->
+	<!-- 注解开启事务-->
     <tx:annotation-driven transaction-manager="transactionManager" />
     
     <!-- 配置事务管理器 -->
@@ -85,4 +88,10 @@
 		</property>	
 	</bean>
   
+  	<!-- 开启ehcache缓存注解   -->
+    <ehcache:annotation-driven cache-manager="ehCacheManager" />
+ 
+    <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"> 
+        <property name="configLocation" value="classpath:/ehcache.xml" /> 
+    </bean> 
 </beans>
