@@ -41,6 +41,15 @@
   	AND
   		u.password = #{password,jdbcType=VARCHAR}
   </select>
+  
+  <!-- 用户列表 -->
+  <select id="list" resultMap="BaseResultMap" parameterType="com.angel.queen.model.ConUsers">
+  	SELECT
+  	<include refid="Base_Column_List"/>
+  	FROM
+  	con_users u
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from con_users
     where user_id = #{userId,jdbcType=BIGINT}

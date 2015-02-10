@@ -1,5 +1,7 @@
 package com.angel.queen.dao.mapper;
 
+import java.util.List;
+
 import com.angel.queen.dao.SqlMapper;
 import com.angel.queen.model.ConUsers;
 
@@ -27,4 +29,6 @@ public interface ConUsersMapper
     ConUsers userLogin(ConUsers user);
     
     ConUsers selectUserByUserName(String userName);
+    
+    List<ConUsers> list();
 }

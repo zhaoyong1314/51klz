@@ -1,5 +1,8 @@
 package com.angel.queen.controller;
 
+import java.util.Date;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.angel.framework.util.MD5Utils;
 import com.angel.queen.common.BaseController;
 import com.angel.queen.model.ConUsers;
 import com.angel.queen.service.IConUsersService;
@@ -41,19 +45,20 @@ public class ConUsersController
 	 * @param username
 	 * @param password
 	 * @return
+	 * @throws Exception 
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public @ResponseBody String login(String username, String password){
+	public @ResponseBody String login(String username, String password) throws Exception{
 		
 		logger.info("-------------login username--------" + username);
-		logger.info("-------------login password--------" + password);
 		
 		ConUsers exist = this.conUsersServiceImpl.findUserByUserName(username);
 		if(exist != null){//用户名不存在
 			
 			ConUsers loginUser = new ConUsers();
 			loginUser.setUserName(username);
-			loginUser.setPassword(password);
+			String md5Pwd = MD5Utils.toMd5Hash(password);
+			loginUser.setPassword(md5Pwd);
 			
 			ConUsers user = this.conUsersServiceImpl.login(loginUser);
 			if(user != null){//用户登录成功
@@ -113,11 +118,34 @@ public class ConUsersController
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public @ResponseBody String addUser(ConUsers user){
 		
-		int result =  this.conUsersServiceImpl.createUser(user);
+		user.setCreateTime(new Date());//创建时间
+		String createIp = super.request.getRemoteAddr();
+		logger.info("---------------客户端IP为：" + createIp + "-----------------");
+		user.setCreateIp(createIp);
+		int result = 0;
+		try {
+			
+			//对密码进行MD5加密
+			String md5 = MD5Utils.toMd5Hash(user.getPassword());
+			user.setPassword(md5);
+			result = this.conUsersServiceImpl.createUser(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info("-------------用户注册失败------------" + e.getMessage());
+		}
 		if(result == 1){
 			return "true";
 		}else{
 			return "false";
 		}
+	}
+	
+	@RequestMapping("/list")
+	public String list(){
+		
+		List<ConUsers> list = this.conUsersServiceImpl.list();
+		logger.info("-------------用户总共有：" + list.size() + "条--------------");
+		
+		return "index";
 	}
 }

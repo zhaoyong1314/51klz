@@ -54,11 +54,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								if(data === "true"){
 									window.location.href = "<%=path%>/index";
 								}else{
-									jQuery("#msg").html("<font color=red>注册失败</font>");
+									jQuery("#msg").html("<font color=red>用户注册失败</font>");
 								}
 							},
 							error:function(){
-								jQuery("#msg").html("<font color=red>注册失败</font>");
+								jQuery("#msg").html("<font color=red>用户注册失败</font>");
 							}
 						});
 					}

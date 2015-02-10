@@ -9,8 +9,10 @@ import org.junit.Test;
 
 import com.angel.framework.util.DateUtil;
 import com.angel.framework.util.JsonUtils;
+import com.angel.framework.util.MD5Utils;
 import com.angel.framework.util.ResourceConfigUtils;
 import com.angel.queen.model.ConUsers;
+import com.google.gson.Gson;
 
 /**
  * 工具方法测试类
@@ -53,5 +55,39 @@ public class UtilTest {
 		
 		String date = DateUtil.date2String(new Date(), "yyyy-MM-dd");
 		System.out.println(date);
+	}
+	
+	@Test
+	public void testMD5(){
+		
+		try {
+			String md5 = MD5Utils.base64Encode("123456");
+			String mdd = MD5Utils.MD5("123456".getBytes("UTF-8"));
+			System.out.println(mdd);
+			String md = MD5Utils.toMd5Hash("123456");
+			System.out.println(md);
+			String str = MD5Utils.base64Decode(md5);
+			System.out.println(md5);
+			System.out.println(str);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testGson(){
+		
+		ConUsers user = new ConUsers();
+		user.setUserName("admin");
+		user.setPassword("123456");
+		
+		Gson gson = new Gson();
+		//简单bean转JSON
+		String json1 = gson.toJson(user);
+		System.out.println(json1);
+		
+		//将JSON转换为bean
+		ConUsers conUsers = gson.fromJson(json1, ConUsers.class);
+		System.out.println(conUsers.getUserName());
 	}
 }
