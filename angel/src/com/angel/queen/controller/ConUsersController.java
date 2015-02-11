@@ -64,6 +64,10 @@ public class ConUsersController
 			if(user != null){//用户登录成功
 				
 				super.session.setAttribute("loginUser", user);
+				
+				if("admin".equals(user.getUserName())){
+					return "3";
+				}
 				return "0";
 			}else{
 				logger.info("----------------密码验证错误----------------");

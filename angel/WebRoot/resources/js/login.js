@@ -30,6 +30,8 @@
 							alert("你输入的密码有误，请重新输入");
 						}else if(data === "0"){
 							window.location.href = $path + "/index";
+						}else{
+							window.location.href = $path + "/back/index";
 						}
 					},
 					error:function(){

@@ -19,6 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/common/share.css"/>
 	<link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/index.css"/>
 	<script type="text/javascript" src="<%=path %>/resources/js/common/mf.jquery.js"></script>
+	<script type="text/javascript" src="<%=path %>/resources/js/template/mf.jtemplates.js"></script>
 	<script type="text/javascript" src="<%=path %>/resources/js/login.js"></script>
 	<script type="text/javascript">
 		jQuery(function(){
@@ -26,6 +27,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			if(loginUser !== null && loginUser !== ''){
 				jQuery(".LoginBox").hide();
 			}
+			var url = "<%=path%>/link/list";
+			jQuery.post(url, null, function(data){
+				var result = {
+					name : 'link_list',
+					list : data
+				}
+				jQuery("#results").setTemplateElement("link");  
+		        jQuery("#results").processTemplate(result); 
+			});
 		});
 	</script>
   </head>
@@ -182,14 +192,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <li class="last"><img src="http://img.lezhuan1.com/attach/event/194.jpg?1420598451" alt="51wan" title="51wan" width="106" height="50" border="0"></li>
                 </ul>
                 <h1 style="margin-bottom:0px;">友情链接</h1>
-                <ul class="Yqlist">
-                    <li><a href="http://www.lezhuan.com" title="快乐赚" target="_blank">快乐赚</a></li>
-                    <li><a href="http://www.889wan.com" title=" 889wan小游戏 " target="_blank"> 889wan小游戏 </a></li>
-                    <li><a href="http://www.miyue.cc" title="蜜约" target="_blank">蜜约</a></li>
-                    <li><a href="http://www.lezhuan.com" title="玩游戏赚钱" target="_blank">玩游戏赚钱</a></li>
-                    <li><a href="http://www.43626.cn/" title="43626网" target="_blank">43626网</a></li>
-                    <li><a href="http://www.yuzhuangbao.com/" title="手机预装" target="_blank">手机预装</a></li>
-                    <li><a href="http://www.jinshare.cn/2015/01/lzhd" title="尽享网" target="_blank">尽享网</a></li>
+                <ul class="Yqlist" id="results">
                 </ul>
             </div>
         </div>
@@ -197,5 +200,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <!--footer-->
     <jsp:include page="footer.jsp"></jsp:include>
+    
+<!------------ friendly link strat--------------->
+<textarea id="link" style="display: none;">  
+{#foreach $T.list as row}   
+<li><a href="{$T.row.url}" title="{$T.row.title}" target="_blank">{$T.row.title}</a></li>
+</textarea>
+<!------------ friendly link end---------------->
    </body>
 </html>
