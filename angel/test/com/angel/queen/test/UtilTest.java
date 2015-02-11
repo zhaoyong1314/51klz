@@ -94,6 +94,7 @@ public class UtilTest {
 	@Test
 	public void testISNull(){
 		
+		logger.info("----------------------------------------------------");
 		String str = "\"null\"";
 		if(str != null && !"".equals(str) && !"\"null\"".equals(str)){
 			System.out.println("-------------");
