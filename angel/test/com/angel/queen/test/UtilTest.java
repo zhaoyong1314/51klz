@@ -90,4 +90,15 @@ public class UtilTest {
 		ConUsers conUsers = gson.fromJson(json1, ConUsers.class);
 		System.out.println(conUsers.getUserName());
 	}
+	
+	@Test
+	public void testISNull(){
+		
+		String str = "\"null\"";
+		if(str != null && !"".equals(str) && !"\"null\"".equals(str)){
+			System.out.println("-------------");
+		}else{
+			System.out.println("aaaaaaaaaaaaaaaa");
+		}
+	}
 }
